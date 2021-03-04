@@ -16,33 +16,59 @@ const styles = StyleSheet.create({
   rightContainer: {
     flex: 1,
     flexDirection: "column",
-    padding: 10,
+    padding: 12,
     justifyContent: "space-between",
   },
   newsImage: {
     width: 100,
-    height: 100,
+    height: "100%",
   },
   text: {
-    fontSize: 16,
+    fontSize: 15,
   },
-  subText: {
+  subArea: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  author: {
     fontSize: 12,
     color: "gray",
+    width: 120,
+  },
+  dateTimeArea: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  dateTime: {
+    fontSize: 12,
+    marginRight: 5,
   },
 });
 
-const ListItem = ({ imageUrl, title, author }) => {
+const ListItem = ({ imageUrl, title, author, dateTime }) => {
+  const date = dateTime.date;
+  const time = dateTime.time;
   return (
     <View style={styles.itemContainer}>
       <View style={styles.leftContainer}>
-        <Image style={styles.newsImage} source={{ uri: imageUrl }} />
+        {!!imageUrl && (
+          <Image style={styles.newsImage} source={{ uri: imageUrl }} />
+        )}
       </View>
       <View style={styles.rightContainer}>
         <Text style={styles.text} numberOfLines={3}>
           {title}
         </Text>
-        <Text style={styles.subText}>{author}</Text>
+        <View style={styles.subArea}>
+          <Text style={styles.author} numberOfLines={1}>
+            {author}
+          </Text>
+          <View style={styles.dateTimeArea}>
+            <Text style={styles.dateTime}>{date}</Text>
+            <Text style={styles.dateTime}>{time}</Text>
+          </View>
+        </View>
       </View>
     </View>
   );
