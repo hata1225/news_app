@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   },
   leftContainer: {
     width: 100,
+    height: "100%",
   },
   rightContainer: {
     flex: 1,
