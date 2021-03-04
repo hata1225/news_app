@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, FlatList, SafeAreaView } from "react-native";
 import ListItem from "./components/ListItem";
-import articles from "./dummies/articles.json";
+import dummyArticles from "./dummies/articles.json";
+import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,18 +14,14 @@ const styles = StyleSheet.create({
 });
 
 export default function App() {
-  const items = articles.map((article, index) => {
-    // article.jsonを展開、一つ一つの要素が引数articleに入り、returnでListItemoを返したものを変数itemsに入れている。
-    // ListItemコンポーネントが複数個itemsに入っているので、keyを設定してreactが追跡できるようにする。
-    return (
-      <ListItem
-        imageUrl={article.urlToImage}
-        title={article.title}
-        author={article.author}
-        key={index}
-      />
-    );
-  });
+  const [articles, setArticles] = useState([]); //state
+  useEffect(() => {
+    alert(Constants.manifest.extra.newsApiKey);
+    const timer = setTimeout(() => {
+      setArticles(dummyArticles);
+    }, 2000);
+    return () => clearTimeout(itmer);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
