@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -46,11 +46,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const ListItem = ({ imageUrl, title, author, dateTime }) => {
+const ListItem = ({ imageUrl, title, author, dateTime, onPress }) => {
   const date = dateTime.date;
   const time = dateTime.time;
   return (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
       <View style={styles.leftContainer}>
         {!!imageUrl && (
           <Image style={styles.newsImage} source={{ uri: imageUrl }} />
@@ -70,7 +70,7 @@ const ListItem = ({ imageUrl, title, author, dateTime }) => {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
