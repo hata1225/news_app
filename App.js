@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import ListItem from "./components/ListItem";
+import article from "./dummies/articles.json";
 
 const styles = StyleSheet.create({
   container: {
@@ -40,16 +41,18 @@ const styles = StyleSheet.create({
 });
 
 export default function App() {
-  return (
-    <View style={styles.container}>
+  const items = article.map((article, index) => {
+    // article.jsonを展開、一つ一つの要素が引数articleに入り、returnでListItemoを返したものを変数itemsに入れている。
+    // ListItemコンポーネントが複数個itemsに入っているので、keyを設定してreactが追跡できるようにする。
+    return (
       <ListItem
-        imageUrl="https://picsum.photos/200/300"
-        title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat."
-        author="sampleNews"
+        imageUrl={article.urlToImage}
+        title={article.title}
+        author={article.author}
+        key={index}
       />
-    </View>
-  );
+    );
+  });
+
+  return <View style={styles.container}>{items}</View>;
 }
