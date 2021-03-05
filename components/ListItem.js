@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
     flexDirection: "row",
+    backgroundColor: "#f7f9f7",
   },
   leftContainer: {
     width: 100,

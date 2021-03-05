@@ -7,12 +7,19 @@ import axios from "axios";
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&apiKey=${Constants.manifest.extra.newsApiKey}`;
 
 const styles = StyleSheet.create({
-  container: {
+  headerSafe: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#39b774",
     justifyContent: "center",
     margin: 0,
     padding: 0,
+  },
+  header: {
+    height: 60,
+    backgroundColor: "#39b774",
+  },
+  fotterSafe: {
+    backgroundColor: "#f7f9f7",
   },
 });
 
@@ -31,7 +38,6 @@ export default HomeScreen = ({ navigation }) => {
     try {
       const response = await axios.get(URL);
       setArticles(response.data.articles);
-      console.log(response.data.articles[6]);
     } catch (error) {
       console.error(error);
     }
@@ -52,7 +58,9 @@ export default HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <>
+      <SafeAreaView style={styles.headerSafes} />
+      <View style={styles.header}></View>
       <FlatList
         data={articles}
         // articlesから一つずつ取り出したのがitem
@@ -62,12 +70,13 @@ export default HomeScreen = ({ navigation }) => {
             title={item.title}
             author={item.author || item.source.name}
             dateTime={dateFormat(item.publishedAt)}
-            onPress={() => navigation.navigate("Article")}
+            onPress={() => navigation.navigate("Article", { article: item })}
           />
         )}
         //keyの設定、indexもkeyExtractorから自動で返ってくる
         keyExtractor={(item, index) => index.toString()}
       />
-    </SafeAreaView>
+      <SafeAreaView style={styles.fotterSafe} />
+    </>
   );
 };
