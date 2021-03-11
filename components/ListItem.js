@@ -45,14 +45,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   dateTime: {
-    fontSize: 12,
-    marginRight: 5,
+    marginRight: 8,
   },
 });
 
-const ListItem = ({ imageUrl, title, author, onPress }) => {
-  // const date = dateTime.date;
-  // const time = dateTime.time;
+const ListItem = ({ imageUrl, title, author, onPress, dateTime }) => {
+  const date = dateTime.date;
+  const time = dateTime.time;
   return (
     <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
       <View style={styles.leftContainer}>
@@ -68,6 +67,10 @@ const ListItem = ({ imageUrl, title, author, onPress }) => {
           <Text style={styles.author} numberOfLines={1}>
             {author}
           </Text>
+          <View style={styles.dateTimeArea}>
+            <Text style={styles.dateTime}>{date}</Text>
+            <Text style={styles.dateTime}>{time}</Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>

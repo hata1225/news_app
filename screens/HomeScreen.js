@@ -22,29 +22,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: lightYellow,
   },
-  main: {},
+  main: {
+    flex: 1,
+  },
   fotterContainer: {
     alignItems: "center",
     flex: 1,
     justifyContent: "center",
     zIndex: 100,
     position: "absolute",
-    // flex: 1,
-    // position: "absolute",
-    // bottom: 0,
-    // zIndex: 100,
   },
-  // footer: {
-  //   height: 120,
-  //   borderTopLeftRadius: 30,
-  //   borderTopRightRadius: 30,
-  //   overflow: "hidden",
-  //   zIndex: 100,
-  //   position: "absolute",
-  //   bottom: "50%",
-  //   backgroundColor: "red",
-  // },
-  sampleImage: {},
 });
 
 export default HomeScreen = ({ navigation }) => {
@@ -98,15 +85,12 @@ export default HomeScreen = ({ navigation }) => {
               title={item.title}
               author={item.author || item.source.name}
               onPress={() => navigation.navigate("Article", { article: item })}
+              dateTime={dateFormat(item.publishedAt)}
             />
           )}
           //keyの設定、indexもkeyExtractorから自動で返ってくる
           keyExtractor={(item, index) => index.toString()}
         />
-        {/* <Image style={styles.sampleImage} source={{ uri: "./logo.png" }} />
-        <BlurView intensity={100} style={styles.footerContainer}>
-          <View style={styles.footer}></View>
-        </BlurView> */}
       </View>
     </>
   );
