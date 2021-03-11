@@ -3,9 +3,7 @@ import { StyleSheet } from "react-native";
 import AppNavigator from "./navigation/AppNavigator";
 
 const styles = StyleSheet.create({
-  sample: {
-    backgroundColor: "#333",
-  },
+  sample: { backgroundColor: "#ffffff" },
 });
 
 export default function App() {

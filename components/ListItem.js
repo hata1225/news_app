@@ -1,14 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import styleCssCom from "./styleCss";
+
+const { lightYellow, lightGray, gray } = styleCssCom;
 
 const styles = StyleSheet.create({
   itemContainer: {
     height: 100,
     width: "100%",
-    borderColor: "gray",
+    borderColor: gray,
     borderWidth: 1,
     flexDirection: "row",
-    backgroundColor: "#f7f9f7",
+    backgroundColor: lightYellow,
   },
   leftContainer: {
     width: 100,
@@ -47,9 +50,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const ListItem = ({ imageUrl, title, author, dateTime, onPress }) => {
-  const date = dateTime.date;
-  const time = dateTime.time;
+const ListItem = ({ imageUrl, title, author, onPress }) => {
+  // const date = dateTime.date;
+  // const time = dateTime.time;
   return (
     <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
       <View style={styles.leftContainer}>
@@ -65,10 +68,6 @@ const ListItem = ({ imageUrl, title, author, dateTime, onPress }) => {
           <Text style={styles.author} numberOfLines={1}>
             {author}
           </Text>
-          <View style={styles.dateTimeArea}>
-            <Text style={styles.dateTime}>{date}</Text>
-            <Text style={styles.dateTime}>{time}</Text>
-          </View>
         </View>
       </View>
     </TouchableOpacity>

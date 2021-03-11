@@ -3,24 +3,48 @@ import { StyleSheet, View, FlatList, SafeAreaView } from "react-native";
 import ListItem from "../components/ListItem";
 import Constants from "expo-constants";
 import axios from "axios";
+import styleCssCom from "../components/styleCss";
+import { BlurView } from "expo-blur";
+// import BackdropFilter from "react-backdrop-filter";
 
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&apiKey=${Constants.manifest.extra.newsApiKey}`;
+const { yellow, lightGray, lightYellow } = styleCssCom;
 
 const styles = StyleSheet.create({
   headerSafe: {
-    flex: 1,
-    backgroundColor: "#39b774",
-    justifyContent: "center",
-    margin: 0,
-    padding: 0,
+    backgroundColor: yellow,
   },
   header: {
-    height: 60,
-    backgroundColor: "#39b774",
+    height: 45,
+    backgroundColor: yellow,
   },
-  fotterSafe: {
-    backgroundColor: "#f7f9f7",
+  mainContainer: {
+    flex: 1,
+    backgroundColor: lightYellow,
   },
+  main: {},
+  fotterContainer: {
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "center",
+    zIndex: 100,
+    position: "absolute",
+    // flex: 1,
+    // position: "absolute",
+    // bottom: 0,
+    // zIndex: 100,
+  },
+  // footer: {
+  //   height: 120,
+  //   borderTopLeftRadius: 30,
+  //   borderTopRightRadius: 30,
+  //   overflow: "hidden",
+  //   zIndex: 100,
+  //   position: "absolute",
+  //   bottom: "50%",
+  //   backgroundColor: "red",
+  // },
+  sampleImage: {},
 });
 
 export default HomeScreen = ({ navigation }) => {
@@ -32,6 +56,7 @@ export default HomeScreen = ({ navigation }) => {
     },
     [] //[]の中には条件付きで
   );
+  console.log(articles);
 
   const fetchArticles = async () => {
     //axiosのgithubドキュメントからコピペ。responseにapi叩いたときの結果が入る。
@@ -51,6 +76,7 @@ export default HomeScreen = ({ navigation }) => {
     const h = ("00" + dt.getHours()).slice(-2);
     const m = ("00" + dt.getMinutes()).slice(-2);
     const s = ("00" + dt.getSeconds()).slice(-2);
+
     return {
       date: Y + "/" + M + "/" + D,
       time: h + ":" + m + ":" + s,
@@ -59,24 +85,29 @@ export default HomeScreen = ({ navigation }) => {
 
   return (
     <>
-      <SafeAreaView style={styles.headerSafes} />
+      <SafeAreaView style={styles.headerSafe} />
       <View style={styles.header}></View>
-      <FlatList
-        data={articles}
-        // articlesから一つずつ取り出したのがitem
-        renderItem={({ item }) => (
-          <ListItem
-            imageUrl={item.urlToImage}
-            title={item.title}
-            author={item.author || item.source.name}
-            dateTime={dateFormat(item.publishedAt)}
-            onPress={() => navigation.navigate("Article", { article: item })}
-          />
-        )}
-        //keyの設定、indexもkeyExtractorから自動で返ってくる
-        keyExtractor={(item, index) => index.toString()}
-      />
-      <SafeAreaView style={styles.fotterSafe} />
+      <View style={styles.mainContainer}>
+        <FlatList
+          style={styles.main}
+          data={articles}
+          // articlesから一つずつ取り出したのがitem
+          renderItem={({ item }) => (
+            <ListItem
+              imageUrl={item.urlToImage}
+              title={item.title}
+              author={item.author || item.source.name}
+              onPress={() => navigation.navigate("Article", { article: item })}
+            />
+          )}
+          //keyの設定、indexもkeyExtractorから自動で返ってくる
+          keyExtractor={(item, index) => index.toString()}
+        />
+        {/* <Image style={styles.sampleImage} source={{ uri: "./logo.png" }} />
+        <BlurView intensity={100} style={styles.footerContainer}>
+          <View style={styles.footer}></View>
+        </BlurView> */}
+      </View>
     </>
   );
 };
