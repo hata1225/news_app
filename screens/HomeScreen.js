@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
 import ListItem from "../components/ListItem";
 import Constants from "expo-constants";
 import axios from "axios";
 import styleCssCom from "../components/styleCss";
 import { BlurView } from "expo-blur";
+import { Overlay } from "react-native-elements";
 // import BackdropFilter from "react-backdrop-filter";
 
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&apiKey=${Constants.manifest.extra.newsApiKey}`;
@@ -25,12 +32,16 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
   },
-  fotterContainer: {
-    alignItems: "center",
-    flex: 1,
-    justifyContent: "center",
-    zIndex: 100,
+  fotter: {
     position: "absolute",
+    height: 115,
+    width: "100%",
+    flex: 1,
+    bottom: 0,
+    // backgroundColor: yellow,
+    justifyContent: "center",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
 });
 
@@ -72,6 +83,7 @@ export default HomeScreen = ({ navigation }) => {
 
   return (
     <>
+      <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.headerSafe} />
       <View style={styles.header}></View>
       <View style={styles.mainContainer}>
@@ -92,6 +104,7 @@ export default HomeScreen = ({ navigation }) => {
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
+      <BlurView intensity={85} tint="light" style={styles.fotter}></BlurView>
     </>
   );
 };
