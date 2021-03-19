@@ -1,33 +1,19 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  SafeAreaView,
-  StatusBar,
-} from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import ListItem from "../components/ListItem";
 import Constants from "expo-constants";
 import axios from "axios";
 import styleCssCom from "../components/styleCss";
 import { BlurView } from "expo-blur";
-import { Overlay } from "react-native-elements";
-// import BackdropFilter from "react-backdrop-filter";
+import Header from "../components/Header";
 
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&apiKey=${Constants.manifest.extra.newsApiKey}`;
-const { yellow, lightGray, lightYellow } = styleCssCom;
+const { yellow, lightGray, lightYellow, white } = styleCssCom;
 
 const styles = StyleSheet.create({
-  headerSafe: {
-    backgroundColor: yellow,
-  },
-  header: {
-    height: 45,
-    backgroundColor: yellow,
-  },
   mainContainer: {
     flex: 1,
-    backgroundColor: lightYellow,
+    backgroundColor: white,
   },
   main: {
     flex: 1,
@@ -83,9 +69,7 @@ export default HomeScreen = ({ navigation }) => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={styles.headerSafe} />
-      <View style={styles.header}></View>
+      <Header />
       <View style={styles.mainContainer}>
         <FlatList
           style={styles.main}
